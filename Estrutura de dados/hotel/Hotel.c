@@ -4,33 +4,63 @@
 #include <math.h>
 #include <ctype.h>
 
-typedef struct quartos{
-    int numero; 
+typedef struct quartos
+{
+    char numeroQuarto[200];
+    char status[200];
     char listaHospedes[200][10];
     int quantHospedesQuarto;
 } quartos;
 
-void limparCaractere () {
-    int limp; 
-    while ((limp = getchar()) != '\n' && limp != EOF);
+void limparCaractere()
+{
+    int limp;
+    while ((limp = getchar()) != '\n' && limp != EOF)
+        ;
 }
 
-void iniciarLista(quartos quarto[], int *posicaoQuarto) {
+void limparString(char *str) {
+    char *end;
+
+    while (isspace((unsigned char)*str)) {
+        str++;
+    }
+    if (*str == 0) { 
+        return;
+    }
+
+    end = str + strlen(str) - 1;
+    while (end > str && isspace((unsigned char)*end)) {
+        end--;
+    }
+    *(end + 1) = '\0';
+}
+
+void iniciarLista(quartos quarto[], int *posicaoQuarto)
+{
     FILE *arquivo = fopen("hospedes.txt", "r");
 
-    if(arquivo == NULL) {
+    if (arquivo == NULL)
+    {
         printf("Erro ao abrir o arquivo.");
         exit(EXIT_FAILURE);
     }
 
-    while(!feof(arquivo)) {
-        fscanf(arquivo, "%d", quarto[*posicaoQuarto].numero);
+    while (!feof(arquivo))
+    {
+        fscanf(arquivo, " %[^\n]", quarto[*posicaoQuarto].numeroQuarto);
+        fscanf(arquivo, " %[^\n]", quarto[*posicaoQuarto].status);
+
+        int limparCaractere;
+        while ((limparCaractere = fgetc(arquivo)) != EOF && limparCaractere != '\n');
 
         quarto[*posicaoQuarto].quantHospedesQuarto = 0;
-        while(1) {
+        while (1)
+        {
             fscanf(arquivo, " %[^\n]", quarto[*posicaoQuarto].listaHospedes[quarto[*posicaoQuarto].quantHospedesQuarto]);
             quarto[*posicaoQuarto].quantHospedesQuarto++;
-            if (strncmp(quarto[*posicaoQuarto].listaHospedes[quarto[*posicaoQuarto].quantHospedesQuarto - 1], "==========", strlen("==========")) == 0) {
+            if (strncmp(quarto[*posicaoQuarto].listaHospedes[quarto[*posicaoQuarto].quantHospedesQuarto - 1], "==========", strlen("==========")) == 0)
+            {
                 break;
             }
         }
@@ -41,46 +71,89 @@ void iniciarLista(quartos quarto[], int *posicaoQuarto) {
     fclose(arquivo);
 }
 
-void inserirHospede (quartos quarto[], int *posicaoQuarto) {
-    int quantHospedesQuarto = 0;
-    int esc = 1;
 
-    FILE *arquivo = fopen("/workspaces/Grupos-faculdade/Estrutura de dados/hotel/hospedes.txt", "a");
+void reescreverLista(quartos quarto[], int quantidadeQuartos) {
+
+    FILE *arquivo = fopen("hospedes.txt", "w+");
 
     if(arquivo == NULL) {
+        printf("Erro ao abrir o arquivo.");
+        exit(1);
+    }
+
+    fseek(arquivo, 0, SEEK_SET);
+
+    for(int cont = 0; cont < quantidadeQuartos; cont++) {
+
+        limparString(quarto[cont].numeroQuarto);
+        limparString(quarto[cont].status);
+        for (int quanHosp = 0; quanHosp < quarto[cont].quantHospedesQuarto; quanHosp++) {
+            limparString(quarto[cont].listaHospedes[quanHosp]);
+        }
+
+        fprintf(arquivo, "%s\n", quarto[cont].numeroQuarto);
+        fprintf(arquivo, "%s\n", quarto[cont].status);
+        for(int quanHosp = 0; quanHosp < quarto[cont].quantHospedesQuarto; quanHosp++) {
+            fprintf(arquivo, "%s\n", quarto[cont].listaHospedes[quanHosp]);
+        }
+
+        if(cont == quantidadeQuartos -1) {
+            fprintf(arquivo, "%s", "==========");
+        }
+        else {
+            fprintf(arquivo, "%s\n", "==========");
+        }
+    } 
+
+    fclose(arquivo);
+} 
+
+void inserirHospede(quartos quarto[], int quartoVazio){
+    int quantHospedesQuarto = 0;
+    long posicaoI = 0, posicaoF = 0;
+    char linhaTxt[300];
+    int esc = 1;
+
+    FILE *arquivo = fopen("hospedes.txt", "r+");
+
+    if (arquivo == NULL){
         printf("Erro ao abrir o arquivo.");
         exit(EXIT_FAILURE);
     }
 
-    fprintf(arquivo, "\n");
-    limparCaractere();
+    while (fgets(linhaTxt, sizeof(linhaTxt), arquivo) != NULL){
+        if (strstr(linhaTxt, quarto[quartoVazio].numeroQuarto) != NULL){
+            posicaoI = ftell(arquivo) - strlen(linhaTxt);
+            limparCaractere();
 
-    do {
-        printf("Digite o nome dos hóspedes, hospede %d: ", quantHospedesQuarto+1);
-        fgets(quarto[*posicaoQuarto].listaHospedes[quantHospedesQuarto], sizeof(quarto[*posicaoQuarto].listaHospedes[quantHospedesQuarto]), stdin);
-        quarto[*posicaoQuarto].listaHospedes[quantHospedesQuarto][strcspn(quarto[*posicaoQuarto].listaHospedes[quantHospedesQuarto], "\n")] = '\0';
-        fprintf(arquivo, "%s\n", quarto[*posicaoQuarto].listaHospedes[quantHospedesQuarto]);
+            do{
+                printf("Digite o nome dos hóspedes, hospede %d: ", quantHospedesQuarto + 1);
+                fgets(quarto[quartoVazio].listaHospedes[quantHospedesQuarto], sizeof(quarto[quartoVazio].listaHospedes[quantHospedesQuarto]), stdin);
+                quarto[quartoVazio].listaHospedes[quantHospedesQuarto][strcspn(quarto[quartoVazio].listaHospedes[quantHospedesQuarto], "\n")] = '\0';
 
-        quantHospedesQuarto++;
-        quarto[*posicaoQuarto].quantHospedesQuarto = quantHospedesQuarto;
+                quantHospedesQuarto++;
+                quarto[quartoVazio].quantHospedesQuarto = quantHospedesQuarto;
 
-        printf("\n[0] Digitar novo hospede |");
-        printf(" [1] Encerrar: ");
-        scanf("\n%d", &esc);
-        limparCaractere();
-    } while (esc != 1);
+                printf("\n[0] Digitar novo hospede |");
+                printf(" [1] Encerrar: ");
+                scanf("\n%d", &esc);
+                limparCaractere();
+            } while (esc != 1);
 
-    fprintf(arquivo, "%s", "==========");
+        }
 
+        strcpy(quarto[quartoVazio].status, "reservado");
+    }
     fclose(arquivo);
 }
 
-int main () {
+int main(){
 
-    quartos quarto[50];
+    quartos quarto[100];
     int posicaoQuarto = 0;
     int esc;
     int resp = 0;
+    int quartoVazio;
 
     iniciarLista(quarto, &posicaoQuarto);
 
@@ -95,46 +168,49 @@ int main () {
         printf("==================== **** ====================");
         printf("\nO que deseja fazer? ");
         scanf("%d", &esc);
-        limparCaractere();
 
-        switch(esc) {
-            case 1:
-                inserirHospede(quarto, &posicaoQuarto);
+        switch (esc){
+        case 1:
+            for (int c = 0; c < posicaoQuarto; c++){
+                if (strcmp(quarto[c].status, "vazio") == 0){
+                    quartoVazio = c;
+                    break;
+                }
+            }
+
+            inserirHospede(quarto, quartoVazio);
+            reescreverLista(quarto, posicaoQuarto);
             break;
 
-            case 2:
-                // listar hóspedes por ordem alfabética
+        case 2:
+            // listar hóspedes por ordem alfabética
             break;
 
-            case 3:
-                // buscar hóspede
+        case 3:
+            // buscar hóspede
             break;
 
-            case 4:
-                // editar hóspede
+        case 4:
+            // editar hóspede
             break;
 
-            case 5:
-                //liberar quarto
+        case 5:
+            // liberar quarto
             break;
 
-            case 6:
-                // quartos vazios
+        case 6:
+            // quartos vazios
             break;
 
-            default:
-                printf("Obrigado por utilizar nosso programa.");
-                break;
+        default:
+            printf("Obrigado por utilizar nosso programa.");
+            break;
         }
 
         printf("\nDeseja realizar mais uma interação? SIM [0] / NÃO [1] ");
         scanf("%d", &resp);
 
     } while (resp != 1);
-
-    printf("\nNúmero do quarto: %d", quarto[0].numero);
-    printf("\nHospede: %s", quarto[0].listaHospedes[0]);
-    printf("\nQuantidade de hospedes no quarto: %d", quarto[0].quantHospedesQuarto);
 
     return 0;
 }
