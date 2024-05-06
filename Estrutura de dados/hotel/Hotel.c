@@ -24,7 +24,7 @@ void iniciarLista(quartos quarto[], int *posicaoQuarto) {
     }
 
     while(!feof(arquivo)) {
-        fscanf(arquivo, " %[^\n]", quarto[*posicaoQuarto].numero);
+        fscanf(arquivo, "%d", quarto[*posicaoQuarto].numero);
 
         quarto[*posicaoQuarto].quantHospedesQuarto = 0;
         while(1) {
@@ -45,12 +45,15 @@ void inserirHospede (quartos quarto[], int *posicaoQuarto) {
     int quantHospedesQuarto = 0;
     int esc = 1;
 
-    FILE *arquivo = fopen("hospedes.txt", "a");
+    FILE *arquivo = fopen("/workspaces/Grupos-faculdade/Estrutura de dados/hotel/hospedes.txt", "a");
 
     if(arquivo == NULL) {
         printf("Erro ao abrir o arquivo.");
         exit(EXIT_FAILURE);
     }
+
+    fprintf(arquivo, "\n");
+    limparCaractere();
 
     do {
         printf("Digite o nome dos hóspedes, hospede %d: ", quantHospedesQuarto+1);
@@ -92,6 +95,7 @@ int main () {
         printf("==================== **** ====================");
         printf("\nO que deseja fazer? ");
         scanf("%d", &esc);
+        limparCaractere();
 
         switch(esc) {
             case 1:
@@ -123,11 +127,14 @@ int main () {
                 break;
         }
 
+        printf("\nDeseja realizar mais uma interação? SIM [0] / NÃO [1] ");
+        scanf("%d", &resp);
+
     } while (resp != 1);
 
-    printf("\nNúmero do quarto: %s", quarto[0].numero);
-    printf("\nHospede: %s", quarto[0].listaHospedes);
-    printf("\nQuantidade de hospedes no quarto: %s", quarto[0].quantHospedesQuarto);
+    printf("\nNúmero do quarto: %d", quarto[0].numero);
+    printf("\nHospede: %s", quarto[0].listaHospedes[0]);
+    printf("\nQuantidade de hospedes no quarto: %d", quarto[0].quantHospedesQuarto);
 
     return 0;
 }
