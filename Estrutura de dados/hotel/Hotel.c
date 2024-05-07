@@ -147,6 +147,50 @@ void inserirHospede(quartos quarto[], int quartoVazio){
     fclose(arquivo);
 }
 
+void liberarQuarto(quartos quarto[], int *posicaoQuarto) {
+    char numeroQuarto[200];
+    int encontrado = 0;
+
+    printf("Digite o número do quarto que deseja liberar: ");
+    scanf("%s", numeroQuarto);
+
+    for (int i = 0; i < *posicaoQuarto; i++) {
+        if (strcmp(quarto[i].numeroQuarto, numeroQuarto) == 0) {
+            encontrado = 1;
+            strcpy(quarto[i].status, "vazio");
+            quarto[i].quantHospedesQuarto = 0;
+            printf("O quarto %s foi liberado com sucesso.\n", numeroQuarto);
+            break;
+        }
+    }
+
+    if (!encontrado) {
+        printf("Quarto não encontrado.\n");
+        return;
+    }
+
+    FILE *arquivo = fopen("hospedes.txt", "w");
+
+    if (arquivo == NULL) {
+        printf("Erro ao abrir o arquivo.\n");
+        exit(EXIT_FAILURE);
+    }
+
+    for (int i = 0; i < *posicaoQuarto; i++) {
+        fprintf(arquivo, "%s\n", quarto[i].numeroQuarto);
+        fprintf(arquivo, "%s\n", quarto[i].status);
+        for (int j = 0; j < quarto[i].quantHospedesQuarto; j++) {
+            fprintf(arquivo, "%s\n", quarto[i].listaHospedes[j]);
+        }
+        fprintf(arquivo, "%s\n", "==========");
+    }
+
+    fclose(arquivo);
+}
+
+
+
+
 int main(){
 
     quartos quarto[100];
@@ -195,7 +239,7 @@ int main(){
             break;
 
         case 5:
-            // liberar quarto
+            liberarQuarto(quarto, &posicaoQuarto);
             break;
 
         case 6:
