@@ -188,6 +188,15 @@ void liberarQuarto(quartos quarto[], int *posicaoQuarto) {
     fclose(arquivo);
 }
 
+void mostrarQuartosVazios(quartos quarto[], int quantidadeQuartos) {
+    printf("Quartos vazios:\n");
+    for (int i = 0; i < quantidadeQuartos; i++) {
+        if (strcmp(quarto[i].status, "vazio") == 0) {
+            printf("%s\n", quarto[i].numeroQuarto);
+        }
+    }
+}
+
 
 
 
@@ -243,7 +252,7 @@ int main(){
             break;
 
         case 6:
-            // quartos vazios
+            mostrarQuartosVazios(quarto, posicaoQuarto);
             break;
 
         default:
