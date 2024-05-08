@@ -155,13 +155,46 @@ void buscarHospede(quartos quarto[], int *posicaoQuarto){
     scanf("%s", nomeProcurado);
 
     for(int i = 0; i < *posicaoQuarto; i++){
-        if (strcmp(quarto[i].listaHospedes, nomeProcurado) == 0){
-            printf("O hospede está no quarto %s", quarto[i].numeroQuarto);
-
-            encontradoNome = 1;
+        for (int j = 0; j < quarto[i].quantHospedesQuarto; j++)
+        {
+            if (strcmp(quarto[i].listaHospedes[j], nomeProcurado) == 0){
+                printf("O hospede foi encontrado no quarto %s.", quarto[i].numeroQuarto);
+                
+                encontradoNome = 1;
         }
+        }
+        
     }
     if(encontradoNome == 0){
+            printf("Esse nome não foi encontrado no nosso sistema.");
+            return;
+    }
+
+    reescreverLista(quarto, *posicaoQuarto);
+
+}
+
+void editarHospede(quartos quarto[], int *posicaoQuarto){
+    char nomeEditar[100];
+    char linhaArquivo[300];
+    int encontradoEditar = 0;
+
+    printf("Digite o nome do Hospede:");
+    scanf("%s", nomeEditar);
+
+    for(int i = 0; i < *posicaoQuarto; i++){
+        for (int j = 0; j < quarto[i].quantHospedesQuarto; j++)
+        {
+            if (strcmp(quarto[i].listaHospedes[j], nomeEditar) == 0){
+                printf("O hospede foi encontrado. Digite o nome pelo qual você deseja substituir:");
+                scanf("%s", quarto[i].listaHospedes[j]);
+
+                encontradoEditar = 1;
+        }
+        }
+        
+    }
+    if(encontradoEditar == 0){
             printf("Esse nome não foi encontrado no nosso sistema.");
             return;
     }
@@ -306,11 +339,11 @@ int main(){
             break;
 
         case 3:
-            // buscar hóspede
+            buscarHospede(quarto, &posicaoQuarto);
             break;
 
         case 4:
-            // editar hóspede
+            editarHospede(quarto, &posicaoQuarto);
             break;
 
         case 5:
