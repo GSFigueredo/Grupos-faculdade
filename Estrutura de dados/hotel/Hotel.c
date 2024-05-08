@@ -146,6 +146,30 @@ void inserirHospede(quartos quarto[], int quartoVazio){
     fclose(arquivo);
 }
 
+void buscarHospede(quartos quarto[], int *posicaoQuarto){
+    char nomeProcurado[100];
+    char linhaArquivo[300];
+    int encontradoNome = 0;
+
+    printf("Digite o nome do Hospede:");
+    scanf("%s", nomeProcurado);
+
+    for(int i = 0; i < *posicaoQuarto; i++){
+        if (strcmp(quarto[i].listaHospedes, nomeProcurado) == 0){
+            printf("O hospede está no quarto %s", quarto[i].numeroQuarto);
+
+            encontradoNome = 1;
+        }
+    }
+    if(encontradoNome == 0){
+            printf("Esse nome não foi encontrado no nosso sistema.");
+            return;
+    }
+
+    reescreverLista(quarto, *posicaoQuarto);
+
+}
+
 void liberarQuarto(quartos quarto[], int *posicaoQuarto) {
     char numeroQuarto[200];
     int encontrado = 0;
