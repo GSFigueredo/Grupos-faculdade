@@ -4,19 +4,16 @@
 #include <math.h>
 #include <ctype.h>
 
-typedef struct quartos
-{
+typedef struct quartos{
     char numeroQuarto[200];
     char status[200];
     char listaHospedes[200][10];
     int quantHospedesQuarto;
 } quartos;
 
-void limparCaractere()
-{
+void limparCaractere(){
     int limp;
-    while ((limp = getchar()) != '\n' && limp != EOF)
-        ;
+    while ((limp = getchar()) != '\n' && limp != EOF);
 }
 
 void limparString(char *str) {
@@ -36,18 +33,15 @@ void limparString(char *str) {
     *(end + 1) = '\0';
 }
 
-void iniciarLista(quartos quarto[], int *posicaoQuarto)
-{
+void iniciarLista(quartos quarto[], int *posicaoQuarto){
     FILE *arquivo = fopen("hospedes.txt", "r");
 
-    if (arquivo == NULL)
-    {
+    if (arquivo == NULL){
         printf("Erro ao abrir o arquivo.");
         exit(EXIT_FAILURE);
     }
 
-    while (!feof(arquivo))
-    {
+    while (!feof(arquivo)){
         fscanf(arquivo, " %[^\n]", quarto[*posicaoQuarto].numeroQuarto);
         fscanf(arquivo, " %[^\n]", quarto[*posicaoQuarto].status);
 
@@ -55,8 +49,7 @@ void iniciarLista(quartos quarto[], int *posicaoQuarto)
         while ((limparCaractere = fgetc(arquivo)) != EOF && limparCaractere != '\n');
 
         quarto[*posicaoQuarto].quantHospedesQuarto = 0;
-        while (1)
-        {
+        while (1){
             fscanf(arquivo, " %[^\n]", quarto[*posicaoQuarto].listaHospedes[quarto[*posicaoQuarto].quantHospedesQuarto]);
             quarto[*posicaoQuarto].quantHospedesQuarto++;
             if (strncmp(quarto[*posicaoQuarto].listaHospedes[quarto[*posicaoQuarto].quantHospedesQuarto - 1], "==========", strlen("==========")) == 0)
