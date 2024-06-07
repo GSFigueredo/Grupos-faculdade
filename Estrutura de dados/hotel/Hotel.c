@@ -288,6 +288,7 @@ int main(){
         printf("[4] Editar hóspede\n");
         printf("[5] Liberar quarto\n");
         printf("[6] Quartos vazios\n");
+        // [7] Todos
         printf("==================== **** ====================");
         printf("\nO que deseja fazer? ");
         scanf("%d", &esc);
