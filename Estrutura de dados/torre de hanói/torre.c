@@ -17,6 +17,13 @@ void adicionarPilha(Pilha* pilha, int tamanho) {
     }
 }
 
+int removerPilha(Pilha* pilha) {
+    if (pilha->topo >= 0) {
+        return pilha->discos[pilha->topo--];
+    }
+    return -1;
+}
+
 void iniciarJogo(Pilha* torres, int numeroDiscos) {
     for (int i = 0; i < 3; i++) {
         iniciarPilhaVazia(&torres[i]);
