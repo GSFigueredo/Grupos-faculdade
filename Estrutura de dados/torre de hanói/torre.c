@@ -99,10 +99,22 @@ int mudarDisco(Pilha* torres, int origem, int destino){
     return 1;
 }
 
+void iniciarJogo(Pilha* torres, int numeroDiscos) {
+    for (int i = 0; i < 3; i++) {
+        iniciarPilhaVazia(&torres[i]);
+    }
+    for (int i = numeroDiscos; i > 0; i--) {
+        adicionarPilha(&torres[0], i);
+    }
+}
+
+int checarFim(Pilha* torres, int numeroDiscos) {
+    return (torres[1].topo == numeroDiscos - 1 || torres[2].topo == numeroDiscos - 1);
+}
 
 int main() {
     int numeroDiscos;
-    Pilha torres[3];
+    int origem, destino;
 
     printf("Digite o número de discos (1-%d): ", 10);
     scanf("%d", &numeroDiscos);
@@ -111,7 +123,37 @@ int main() {
         return 1;
     }
 
+    Pilha torres[3];
     iniciarJogo(torres, numeroDiscos);
 
+    while (1) {
+        system("clear");
+        mostrarPilhas(torres, numeroDiscos);
+
+        if (checarFim(torres, numeroDiscos)) {
+            printf("Parabéns! Você venceu o jogo!\n");
+            printf("Deseja jogar novamente? (1-Sim / 0-Não): ");
+            int reiniciar;
+            scanf("%d", &reiniciar);
+            if (reiniciar) {
+                iniciarJogo(torres, numeroDiscos);
+            } else {
+                break;
+            }
+        }
+
+        printf("Digite a torre de origem: ");
+        scanf("%d", &origem);
+
+        printf("Digite a torre de destino: ");
+        scanf("%d", &destino);
+
+        mostrarPilhas(torres, numeroDiscos);
+
+        if (mudarDisco(torres, origem - 1, destino - 1)) {
+            mostrarPilhas(torres, numeroDiscos);
+        }
+    }
+
     return 0;
-} 
+}
