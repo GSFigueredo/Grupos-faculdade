@@ -105,10 +105,24 @@ int checarFim(Pilha* torres, int numeroDiscos) {
 int main() {
     int numeroDiscos;
     Pilha torres[3];
-    int origem, destino;
+    int origem, destino, resp;
 
+    printf("=============== TORRE DE HANÓI ===============");
+    printf("\n\nO objetivo é passar todos os discos para a última torre com a ajuda da torre central, de modo que no momento da \ntransferência o disco de maior diâmetro nunca fique sobre o de menor diâmetro.");
+
+    printf("\n\n=============== REGRAS DO JOGO ===============");
+    printf("\n\n1. Movimentar uma só peça (disco) de cada vez.");
+    printf("\n2. Uma peça maior não pode ficar acima de uma menor.");
+    printf("\n3. Não é permitido movimentar uma peça que esteja abaixo de outra.");
+    printf("\n\n==============================================");
+    printf("\n\nPronto para jogar [1] Sim / [0] Não, encerrar: ");
+    scanf("%d", &resp); 
+
+    if(resp == 1) {
+    system("clear");
     printf("Digite o número de discos (1-%d): ", 10);
     scanf("%d", &numeroDiscos);
+
     if (numeroDiscos < 1 || numeroDiscos > 10) {
         printf("Número de discos inválido. Deve estar entre 1 e %d.\n", 10);
         return 1;
@@ -143,6 +157,10 @@ int main() {
         if (mudarDisco(torres, origem - 1, destino - 1)) {
             mostrarPilhas(torres, numeroDiscos);
         }
+    }
+
+    } else { 
+        printf("\nObrigado por utilizar nosso programa.");
     }
 
     return 0;
