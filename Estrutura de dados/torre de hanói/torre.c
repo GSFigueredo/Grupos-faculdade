@@ -74,6 +74,32 @@ void iniciarJogo(Pilha* torres, int numeroDiscos) {
     }
 }
 
+
+int mudarDisco(Pilha* torres, int origem, int destino){
+    if(origem < 0 || origem >= 3 || destino < 0 || destino >= 3 || origem == destino){
+        printf("Movimento inválido!\n");
+        return 0;
+    }
+    
+    int disco = removePilha(&torres[origem]);
+    if(disco == -1)
+    {
+        printf("Não há discos na torre %d para mover!\n", origem + 1);
+        return 0;
+    }
+    
+    if(torres[destino].topo >= 0 && torres[destino].discos[torres[destino].topo] < disco)
+    {
+        printf("Movimento inválido! Não é possível colocar um disco maior sobre um menor.\n");
+        adicionarPilha(&torres[origem], disco);
+        return 0;
+    }
+
+    adicionarPilha(&torres[destino], disco);
+    return 1;
+}
+
+
 int main() {
     int numeroDiscos;
     Pilha torres[3];
