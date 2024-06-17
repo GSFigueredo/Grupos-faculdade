@@ -64,24 +64,14 @@ void mostrarPilhas(Pilha* torres, int numeroDiscos) {
     printf("\n");
 }
 
-
-void iniciarJogo(Pilha* torres, int numeroDiscos) {
-    for (int i = 0; i < 3; i++) {
-        iniciarPilhaVazia(&torres[i]);
-    }
-    for (int i = numeroDiscos; i > 0; i--) {
-        adicionarPilha(&torres[0], i);
-    }
-}
-
-
 int mudarDisco(Pilha* torres, int origem, int destino){
     if(origem < 0 || origem >= 3 || destino < 0 || destino >= 3 || origem == destino){
         printf("Movimento inválido!\n");
         return 0;
     }
     
-    int disco = removePilha(&torres[origem]);
+    int disco = removerPilha(&torres[origem]);
+    
     if(disco == -1)
     {
         printf("Não há discos na torre %d para mover!\n", origem + 1);
@@ -114,6 +104,7 @@ int checarFim(Pilha* torres, int numeroDiscos) {
 
 int main() {
     int numeroDiscos;
+    Pilha torres[3];
     int origem, destino;
 
     printf("Digite o número de discos (1-%d): ", 10);
@@ -123,7 +114,6 @@ int main() {
         return 1;
     }
 
-    Pilha torres[3];
     iniciarJogo(torres, numeroDiscos);
 
     while (1) {
