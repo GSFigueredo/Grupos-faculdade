@@ -23,6 +23,47 @@ int removerPilha(Pilha* pilha) {
     }
     return -1;
 }
+void mostrarPilhas(Pilha* torres, int numeroDiscos) {
+    for (int nivel = numeroDiscos - 1; nivel >= 0; nivel--) {
+        for (int torre = 0; torre < 3; torre++) {
+            if (torres[torre].topo >= nivel) {
+                int tamanho = torres[torre].discos[nivel];
+                for (int s = 0; s < 10 - tamanho; s++) {
+                    printf(" ");
+                }
+                for (int s = 0; s < tamanho; s++) {
+                    printf("=");
+                }
+                printf("|");
+                for (int s = 0; s < tamanho; s++) {
+                    printf("=");
+                }
+                for (int s = 0; s < 10 - tamanho; s++) {
+                    printf(" ");
+                }
+            } else {
+                for (int s = 0; s < 2 * 10 + 1; s++) {
+                    printf(" ");
+                }
+            }
+            printf("   ");
+        }
+        printf("\n");
+    }
+
+    for (int i = 0; i < 3; i++) {
+        for (int s = 0; s < 10; s++) {
+            printf(" ");
+        }
+        printf(" %d ", i + 1);
+        for (int s = 0; s < 10; s++) {
+            printf(" ");
+        }
+        printf("   ");
+    }
+    printf("\n");
+}
+
 
 void iniciarJogo(Pilha* torres, int numeroDiscos) {
     for (int i = 0; i < 3; i++) {
@@ -47,4 +88,4 @@ int main() {
     iniciarJogo(torres, numeroDiscos);
 
     return 0;
-}
+} 
