@@ -71,7 +71,7 @@ int mudarDisco(Pilha* torres, int origem, int destino){
     }
     
     int disco = removerPilha(&torres[origem]);
-    
+
     if(disco == -1)
     {
         printf("Não há discos na torre %d para mover!\n", origem + 1);
