@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <math.h>
 #include <string.h>
+#include <unistd.h> 
 typedef struct {
     int discos[10];
     int topo;
@@ -106,19 +107,22 @@ int main() {
     int numeroDiscos;
     Pilha torres[3];
     int origem, destino, resp;
+    int reiniciarJogo;
 
     printf("=============== TORRE DE HANÓI ===============");
     printf("\n\nO objetivo é passar todos os discos para a última torre com a ajuda da torre central, de modo que no momento da \ntransferência o disco de maior diâmetro nunca fique sobre o de menor diâmetro.");
 
-    printf("\n\n=============== REGRAS DO JOGO ===============");
+    printf("\n\n=============== REGRAS ===============");
     printf("\n\n1. Movimentar uma só peça (disco) de cada vez.");
     printf("\n2. Uma peça maior não pode ficar acima de uma menor.");
     printf("\n3. Não é permitido movimentar uma peça que esteja abaixo de outra.");
+    printf("\n4. A qualquer momento, digite ""1000"" para reiniciar o jogo.");
     printf("\n\n==============================================");
     printf("\n\nPronto para jogar [1] Sim / [0] Não, encerrar: ");
     scanf("%d", &resp); 
 
     if(resp == 1) {
+    reiniciar_jogo:
     system("clear");
     printf("Digite o número de discos (1-%d): ", 10);
     scanf("%d", &numeroDiscos);
@@ -136,11 +140,15 @@ int main() {
 
         if (checarFim(torres, numeroDiscos)) {
             printf("Parabéns! Você venceu o jogo!\n");
-            printf("Deseja jogar novamente? (1-Sim / 0-Não): ");
+            printf("Deseja jogar novamente? [1] Sim / [0] Não: ");
             int reiniciar;
             scanf("%d", &reiniciar);
-            if (reiniciar) {
-                iniciarJogo(torres, numeroDiscos);
+
+            if (reiniciar == 1) {
+                system("clear");
+                printf("Reiniciando o jogo...\n");
+                sleep(2);
+                goto reiniciar_jogo;
             } else {
                 break;
             }
@@ -149,8 +157,26 @@ int main() {
         printf("Digite a torre de origem: ");
         scanf("%d", &origem);
 
+        reiniciarJogo = origem; 
+
+        if(reiniciarJogo == 1000) { 
+            system("clear");
+            printf("Reiniciando o jogo...\n");
+            sleep(2);
+            goto reiniciar_jogo;
+        }
+
         printf("Digite a torre de destino: ");
         scanf("%d", &destino);
+
+        reiniciarJogo = destino; 
+
+        if(reiniciarJogo == 1000) { 
+            system("clear");
+            printf("Reiniciando o jogo...\n");
+            sleep(2);
+            goto reiniciar_jogo;
+        }
 
         mostrarPilhas(torres, numeroDiscos);
 
