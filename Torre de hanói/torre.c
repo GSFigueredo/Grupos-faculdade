@@ -3,8 +3,10 @@
 #include <math.h>
 #include <string.h>
 #include <unistd.h> 
+
+#define MAXIMO_DISCOS 10
 typedef struct {
-    int discos[10];
+    int discos[MAXIMO_DISCOS];
     int topo;
 } Pilha;
 
@@ -13,7 +15,7 @@ void iniciarPilhaVazia(Pilha* pilha) {
 }
 
 void adicionarPilha(Pilha* pilha, int tamanho) {
-    if (pilha->topo < 10 - 1) {
+    if (pilha->topo < MAXIMO_DISCOS - 1) {
         pilha->discos[++pilha->topo] = tamanho;
     }
 }
@@ -29,7 +31,7 @@ void mostrarPilhas(Pilha* torres, int numeroDiscos) {
         for (int torre = 0; torre < 3; torre++) {
             if (torres[torre].topo >= nivel) {
                 int tamanho = torres[torre].discos[nivel];
-                for (int s = 0; s < 10 - tamanho; s++) {
+                for (int s = 0; s < MAXIMO_DISCOS - tamanho; s++) {
                     printf(" ");
                 }
                 for (int s = 0; s < tamanho; s++) {
@@ -39,11 +41,11 @@ void mostrarPilhas(Pilha* torres, int numeroDiscos) {
                 for (int s = 0; s < tamanho; s++) {
                     printf("=");
                 }
-                for (int s = 0; s < 10 - tamanho; s++) {
+                for (int s = 0; s < MAXIMO_DISCOS - tamanho; s++) {
                     printf(" ");
                 }
             } else {
-                for (int s = 0; s < 2 * 10 + 1; s++) {
+                for (int s = 0; s < 2 * MAXIMO_DISCOS + 1; s++) {
                     printf(" ");
                 }
             }
@@ -53,11 +55,11 @@ void mostrarPilhas(Pilha* torres, int numeroDiscos) {
     }
 
     for (int i = 0; i < 3; i++) {
-        for (int s = 0; s < 10; s++) {
+        for (int s = 0; s < MAXIMO_DISCOS; s++) {
             printf(" ");
         }
         printf(" %d ", i + 1);
-        for (int s = 0; s < 10; s++) {
+        for (int s = 0; s < MAXIMO_DISCOS; s++) {
             printf(" ");
         }
         printf("   ");
@@ -122,68 +124,65 @@ int main() {
     scanf("%d", &resp); 
 
     if(resp == 1) {
-    reiniciar_jogo:
-    system("clear");
-    printf("Digite o número de discos (1-%d): ", 10);
-    scanf("%d", &numeroDiscos);
 
-    if (numeroDiscos < 1 || numeroDiscos > 10) {
-        printf("Número de discos inválido. Deve estar entre 1 e %d.\n", 10);
-        return 1;
-    }
+        do {
+            reiniciarJogo = 0;
 
-    iniciarJogo(torres, numeroDiscos);
+            system("clear");
+            printf("Digite o número de discos (1-%d): ", MAXIMO_DISCOS);
+            scanf("%d", &numeroDiscos);
 
-    while (1) {
-        system("clear");
-        mostrarPilhas(torres, numeroDiscos);
+            if (numeroDiscos < 1 || numeroDiscos > MAXIMO_DISCOS) {
+                printf("Número de discos inválido. Deve estar entre 1 e %d.\n", MAXIMO_DISCOS);
+                return 1;
+            }
 
-        if (checarFim(torres, numeroDiscos)) {
-            printf("Parabéns! Você venceu o jogo!\n");
-            printf("Deseja jogar novamente? [1] Sim / [0] Não: ");
-            int reiniciar;
-            scanf("%d", &reiniciar);
+            iniciarJogo(torres, numeroDiscos);
 
-            if (reiniciar == 1) {
+            while (1) {
+                system("clear");
+                mostrarPilhas(torres, numeroDiscos);
+
+                if (checarFim(torres, numeroDiscos)) {
+                    printf("Parabéns! Você venceu o jogo!\n");
+                    printf("Deseja jogar novamente? [1] Sim / [0] Não: ");
+                    int reiniciar;
+                    scanf("%d", &reiniciar);
+
+                    if (reiniciar == 1) {
+                        reiniciarJogo = 1000;
+                        break;
+                    } else {
+                        exit(0);
+                    }
+                }
+
+                printf("Digite a torre de origem: ");
+                scanf("%d", &origem);
+
+                if(origem == 1000) { 
+                    reiniciarJogo = 1000;
+                    break;
+                }
+
+                printf("Digite a torre de destino: ");
+                scanf("%d", &destino);
+
+                if(destino == 1000) { 
+                    reiniciarJogo = 1000;
+                    break;
+                }
+
+                if (mudarDisco(torres, origem - 1, destino - 1)) {
+                    mostrarPilhas(torres, numeroDiscos);
+                }
+            }
+            if(reiniciarJogo == 1000) { 
                 system("clear");
                 printf("Reiniciando o jogo...\n");
                 sleep(2);
-                goto reiniciar_jogo;
-            } else {
-                break;
             }
-        }
-
-        printf("Digite a torre de origem: ");
-        scanf("%d", &origem);
-
-        reiniciarJogo = origem; 
-
-        if(reiniciarJogo == 1000) { 
-            system("clear");
-            printf("Reiniciando o jogo...\n");
-            sleep(2);
-            goto reiniciar_jogo;
-        }
-
-        printf("Digite a torre de destino: ");
-        scanf("%d", &destino);
-
-        reiniciarJogo = destino; 
-
-        if(reiniciarJogo == 1000) { 
-            system("clear");
-            printf("Reiniciando o jogo...\n");
-            sleep(2);
-            goto reiniciar_jogo;
-        }
-
-        mostrarPilhas(torres, numeroDiscos);
-
-        if (mudarDisco(torres, origem - 1, destino - 1)) {
-            mostrarPilhas(torres, numeroDiscos);
-        }
-    }
+        } while (reiniciarJogo == 1000);
 
     } else { 
         printf("\nObrigado por utilizar nosso programa.");
