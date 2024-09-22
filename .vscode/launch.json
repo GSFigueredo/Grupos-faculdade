@@ -21,8 +21,8 @@
       "args": [],
       "stopAtEntry": false,
       "externalConsole": false,
-      "cwd": "/workspaces/gruposFaculdade/Torre de hanói",
-      "program": "/workspaces/gruposFaculdade/Torre de hanói/build/Debug/outDebug",
+      "cwd": "/workspaces/gruposFaculdade/Linguagens formais, automatos e compiladores/projeto compiladorf",
+      "program": "/workspaces/gruposFaculdade/Linguagens formais, automatos e compiladores/projeto compiladorf/build/Debug/outDebug",
       "MIMode": "gdb",
       "miDebuggerPath": "gdb",
       "setupCommands": [
