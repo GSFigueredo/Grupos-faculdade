@@ -5,8 +5,6 @@
 #include "analisador_lexico.h" 
 
 #define MAX_TK 100 
-
-// guardar os tokens
 typedef struct {
     tipoToken tipo;
     char palavra[MAX_TK]; 
@@ -25,7 +23,6 @@ void mostrarToken(token t) {
     printf("Token: %d | Valor: %s | Linha: %d\n", t.tipo, t.palavra, t.linha);
 }
 
-// Verifica se o token é uma palavra-chave
 tipoToken checarToken(const char* palavra) {
     if (strcmp(palavra, "program") == 0) return tk_program;
     if (strcmp(palavra, "var") == 0) return tk_var;
@@ -66,7 +63,6 @@ tipoToken checarElemento(const char* operador) {
     return tk_desconhecido;
 }
 
-
 void identificarToken(FILE* arquivo) {
     int linha = 1;
     int caractere;
@@ -84,8 +80,6 @@ void identificarToken(FILE* arquivo) {
             } while (isalnum(caractere) && caractere_id < MAX_TK - 1);  // Continua enquanto for letra ou número
 
             palavra[caractere_id] = '\0';  // encerra a string
-
-           // if (!isspace(caractere)) ungetc(caractere, arquivo); // ler caractere extra
 
             tipoToken tipo = checarToken(palavra);  // Verifica se é palavra-chave
             token t = criarToken(tipo, palavra, linha); 
@@ -106,7 +100,6 @@ void identificarToken(FILE* arquivo) {
 }
 
 int main() {
-    
     FILE* arquivo = fopen("codigo.txt", "r");
     if (!arquivo) {
         perror("Erro ao abrir o arquivo");
