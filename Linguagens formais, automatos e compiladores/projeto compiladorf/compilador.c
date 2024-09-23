@@ -19,8 +19,8 @@ token criarToken(tipoToken tipo, const char* palavra, int linha) {
     return t;
 }
 
-void mostrarToken(token t) {
-    printf("Token: %d | Valor: %s | Linha: %d\n", t.tipo, t.palavra, t.linha);
+void salvarToken(FILE *arquivoLex, token t) {
+    fprintf(arquivoLex, "Token: %d | Valor: %s | Linha: %d\n", t.tipo, t.palavra, t.linha);
 }
 
 tipoToken checarToken(const char* palavra) {
@@ -69,6 +69,12 @@ void identificarToken(FILE* arquivo) {
     char palavra[MAX_TK];
     int caractere_id;
 
+    FILE *arquivoLex = fopen("saida.lex", "w");
+    if (!arquivoLex) {
+        perror("Erro ao criar o arquivo .lex");
+        return;
+    }
+
     while ((caractere = fgetc(arquivo)) != EOF) {
         if (isspace(caractere)) {  // identifica caractere em branco
             if (caractere == '\n') linha++;  // se identificar quebra de linha, pula para a próxima
@@ -83,7 +89,7 @@ void identificarToken(FILE* arquivo) {
 
             tipoToken tipo = checarToken(palavra);  // Verifica se é palavra-chave
             token t = criarToken(tipo, palavra, linha); 
-            mostrarToken(t); 
+            salvarToken(arquivoLex, t); 
         } else {
              // Identificar um operador de somente um caractere (+, -, *, /, etc.)
             palavra[0] = caractere;
@@ -91,12 +97,14 @@ void identificarToken(FILE* arquivo) {
 
             tipoToken tipo = checarElemento(palavra);
             token t = criarToken(tipo, palavra, linha); 
-            mostrarToken(t);
+            salvarToken(arquivoLex, t);
         }
     }
 
     token t = criarToken(tk_eof, "EOF", linha);
-    mostrarToken(t);
+    salvarToken(arquivoLex, t);
+
+    fclose(arquivoLex);
 }
 
 int main() {
