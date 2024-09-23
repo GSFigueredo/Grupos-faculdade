@@ -81,7 +81,7 @@ void identificarToken(FILE* arquivo) {
         } else if (isalpha(caractere)) {  // se não, vem para esse bloco de comandos, aqui ele vai verificar se o caractere é alfanumerico
             caractere_id = 0;
             do {
-                palavra[caractere_id++] = caractere;  // Armazena a palavra no palavra
+                palavra[caractere_id++] = caractere;  // Armazena a palavra no vetor palavra
                 caractere = fgetc(arquivo); // ler o proximo caractere, pois o fgetc, lê o caractere e já manda para o próximo, e neste caso foi feito na linha 51
             } while (isalnum(caractere) && caractere_id < MAX_TK - 1);  // Continua enquanto for letra ou número
 
@@ -91,9 +91,15 @@ void identificarToken(FILE* arquivo) {
             token t = criarToken(tipo, palavra, linha); 
             salvarToken(arquivoLex, t); 
         } else {
+            caractere_id = 0;
+
              // Identificar um operador de somente um caractere (+, -, *, /, etc.)
-            palavra[0] = caractere;
-            palavra[1] = '\0';
+            do { 
+                palavra[caractere_id++] = caractere;
+                caractere = fgetc(arquivo);
+            } while (!isalnum(caractere) && !isspace(caractere)); 
+
+            palavra[caractere_id++] = '\0';
 
             tipoToken tipo = checarElemento(palavra);
             token t = criarToken(tipo, palavra, linha); 
