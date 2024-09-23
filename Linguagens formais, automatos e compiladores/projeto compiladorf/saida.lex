@@ -43,7 +43,7 @@ Token: 12 | Valor: + | Linha: 4
 Token: 29 | Valor: 1; | Linha: 4
 Token: 9 | Valor: while | Linha: 4
 Token: 28 | Valor: z | Linha: 4
-Token: 32 | Valor: <= | Linha: 4
+Token: 19 | Valor: <= | Linha: 4
 Token: 29 | Valor: 1 | Linha: 4
 Token: 29 | Valor: 0 | Linha: 4
 Token: 10 | Valor: do | Linha: 4

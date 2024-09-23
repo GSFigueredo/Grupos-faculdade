@@ -45,6 +45,8 @@ tipoToken checarElemento(const char* operador) {
     if (strcmp(operador, "/") == 0) return tk_div;
     if (strcmp(operador, ">") == 0) return tk_maior;
     if (strcmp(operador, "<") == 0) return tk_menor;
+    if (strcmp(operador, "<=") == 0) return tk_menor_eq;
+    if (strcmp(operador, ">=") == 0) return tk_maior_eq;
     if (strcmp(operador, ":=") == 0) return tk_dp_eq;
     if (strcmp(operador, "=") == 0) return tk_eq;
     if (strcmp(operador, ";") == 0) return tk_pt_virg;
@@ -93,7 +95,7 @@ void identificarToken(FILE* arquivo) {
         } else {
             caractere_id = 0;
 
-             // Identificar um operador de somente um caractere (+, -, *, /, etc.)
+             // Identificar operadores (., /, *, :=, :, etc)
             do { 
                 palavra[caractere_id++] = caractere;
                 caractere = fgetc(arquivo);
