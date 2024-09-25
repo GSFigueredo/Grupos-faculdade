@@ -1,0 +1,14 @@
+USE BD_CONCESSIONARIAS;
+
+CREATE TABLE IF NOT EXISTS CARROS (
+    id_carro INT PRIMARY KEY AUTO_INCREMENT, 
+    nome_carro varchar(255) not null,
+    tipo VARCHAR(255) NOT NULL, 
+    modelo VARCHAR(255) NOT NULL,
+    consumo_medio DECIMAL(5,2) NOT NULL, 
+    cilindradas INT NOT NULL, 
+    ano_fabricacao varchar(20) not null,
+    tracao VARCHAR(10) NOT NULL CHECK(tracao IN ('Dianteira', 'Traseira', '4x4')), 
+    id_marca INT,
+    FOREIGN KEY (id_marca) REFERENCES MARCAS(id_marca)
+);
