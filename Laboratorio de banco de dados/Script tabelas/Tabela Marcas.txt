@@ -8,5 +8,5 @@ CREATE TABLE IF NOT EXISTS MARCAS (
     pais_sede VARCHAR(255) NOT NULL,
     cidade_sede varchar(255) NOT NULL,
     ceo_marca VARCHAR(255) NOT NULL,
-    fundacao varchar(20)
+    fundacao int not null
 );
