@@ -7,7 +7,7 @@ CREATE TABLE IF NOT EXISTS CARROS (
     modelo VARCHAR(255) NOT NULL,
     consumo_medio DECIMAL(5,2) NOT NULL, 
     cilindradas INT NOT NULL, 
-    ano_fabricacao varchar(20) not null,
+    ano_fabricacao int not null,
     tracao VARCHAR(10) NOT NULL CHECK(tracao IN ('Dianteira', 'Traseira', '4x4')), 
     id_marca INT,
     FOREIGN KEY (id_marca) REFERENCES MARCAS(id_marca)
