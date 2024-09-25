@@ -1,0 +1,15 @@
+USE BD_CONCESSIONARIAS;
+
+CREATE TABLE IF NOT EXISTS COMPONENTES_INTERNOS (
+    id_componentes_internos INT PRIMARY KEY AUTO_INCREMENT,
+    direcao VARCHAR(20) NOT NULL CHECK(direcao IN ('Hidráulica', 'Elétrica', 'Mecânica', 'Eletro-hidraulico', 'Eletroassistida')), 
+    transmissao VARCHAR(20) NOT NULL CHECK(transmissao IN ('Automática', 'Manual', 'CVT')),
+    alimentacao_ar VARCHAR(20) NOT NULL CHECK(alimentacao_ar IN ('Aspirado', 'Turbo', 'Turbo Diesel')),
+    qtd_cilindros INT NOT NULL, 
+    frenagem VARCHAR(50) NOT NULL, 
+    tipo_correia VARCHAR(20) NOT NULL CHECK(tipo_correia IN ('Correia dentada', 'Corrente')),
+    tipo_farol VARCHAR(20) NOT NULL CHECK(tipo_farol IN ('Xenon', 'Bi-xenon', 'Halógeno', 'LED', 'Bi-LED', 'Laser')),
+    tamanho_tanque INT NOT NULL,
+    id_carro INT,
+    FOREIGN KEY (id_carro) REFERENCES CARROS(id_carro) ON DELETE CASCADE
+);
