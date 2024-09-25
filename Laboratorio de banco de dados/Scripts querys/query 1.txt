@@ -1,0 +1,117 @@
+SELECT 
+	* 
+FROM (
+select 
+	a.nome_marca as 'MARCA',
+	b.nome_carro as 'NOME VEÍCULO',
+    b.tipo AS 'TIPO',
+    b.consumo_medio AS 'CONSUMO MÉDIO',
+    b.cilindradas AS 'CILINDRADAS',
+    b.tracao AS 'TRAÇÃO',
+    c.roda_aro as 'ARO', 
+    c.qtd_portas as 'QUANTIDADE_PORTAS',
+    c.qtd_assentos as 'QUANTIDADE_ASSENTOS',
+    d.direcao as 'DIREÇÃO',
+    d.transmissao as 'TRANSMISSÃO', 
+    d.frenagem as 'FRENAGEM',
+    b.ano_fabricacao as 'ANO_FABRICACAO',
+	'A' AS 'CLASSE'
+from 
+	marcas a 
+inner join carros b on 
+	a.id_marca = b.id_marca
+inner join componentes_externos c on 
+	b.id_carro = c.id_carro
+inner join componentes_internos d on 
+	c.id_carro = d.id_carro
+where 
+	b.cilindradas >= 4500
+    and ano_fabricacao between 2020 and 2024
+UNION ALL 
+select 
+	a.nome_marca as 'MARCA',
+	b.nome_carro as 'NOME VEÍCULO',
+    b.tipo AS 'TIPO',
+    b.consumo_medio AS 'CONSUMO MÉDIO',
+    b.cilindradas AS 'CILINDRADAS',
+    b.tracao AS 'TRAÇÃO',
+    c.roda_aro as 'ARO', 
+    c.qtd_portas as 'QUANTIDADE_PORTAS',
+    c.qtd_assentos as 'QUANTIDADE_ASSENTOS',
+    d.direcao as 'DIREÇÃO',
+    d.transmissao as 'TRANSMISSÃO', 
+    d.frenagem as 'FRENAGEM',
+    b.ano_fabricacao as 'ANO_FABRICACAO',
+	'B' AS 'CLASSE'
+from 
+	marcas a 
+inner join carros b on 
+	a.id_marca = b.id_marca
+inner join componentes_externos c on 
+	b.id_carro = c.id_carro
+inner join componentes_internos d on 
+	c.id_carro = d.id_carro
+where 
+	b.cilindradas between 2500 and 4499
+    and ano_fabricacao between 2017 and 2024
+union all
+select 
+	a.nome_marca as 'MARCA',
+	b.nome_carro as 'NOME VEÍCULO',
+    b.tipo AS 'TIPO',
+    b.consumo_medio AS 'CONSUMO MÉDIO',
+    b.cilindradas AS 'CILINDRADAS',
+    b.tracao AS 'TRAÇÃO',
+    c.roda_aro as 'ARO', 
+    c.qtd_portas as 'QUANTIDADE_PORTAS',
+    c.qtd_assentos as 'QUANTIDADE_ASSENTOS',
+    d.direcao as 'DIREÇÃO',
+    d.transmissao as 'TRANSMISSÃO', 
+    d.frenagem as 'FRENAGEM',
+    b.ano_fabricacao as 'ANO_FABRICACAO',
+	'C' AS 'CLASSE'
+from 
+	marcas a 
+inner join carros b on 
+	a.id_marca = b.id_marca
+inner join componentes_externos c on 
+	b.id_carro = c.id_carro
+inner join componentes_internos d on 
+	c.id_carro = d.id_carro
+where 
+	b.cilindradas between 1000 and 2499
+    and ano_fabricacao <= 2016
+    and b.consumo_medio >= 10
+union all
+select 
+	a.nome_marca as 'MARCA',
+	b.nome_carro as 'NOME VEÍCULO',
+    b.tipo AS 'TIPO',
+    b.consumo_medio AS 'CONSUMO MÉDIO',
+    b.cilindradas AS 'CILINDRADAS',
+    b.tracao AS 'TRAÇÃO',
+    c.roda_aro as 'ARO', 
+    c.qtd_portas as 'QUANTIDADE_PORTAS',
+    c.qtd_assentos as 'QUANTIDADE_ASSENTOS',
+    d.direcao as 'DIREÇÃO',
+    d.transmissao as 'TRANSMISSÃO', 
+    d.frenagem as 'FRENAGEM',
+    b.ano_fabricacao as 'ANO_FABRICACAO',
+	'D' AS 'CLASSE'
+from 
+	marcas a 
+inner join carros b on 
+	a.id_marca = b.id_marca
+inner join componentes_externos c on 
+	b.id_carro = c.id_carro
+inner join componentes_internos d on 
+	c.id_carro = d.id_carro
+where 
+	b.cilindradas <= 999
+    and ano_fabricacao <= 2016
+    and b.consumo_medio >= 8
+) X
+ORDER BY 
+	X.CLASSE,
+	X.ANO_FABRICACAO
+;

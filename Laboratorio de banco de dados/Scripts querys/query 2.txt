@@ -1,0 +1,25 @@
+WITH consumoMarca AS (
+    SELECT 
+        a.nome_marca,
+        AVG(b.consumo_medio) AS media_consumo, 
+        AVG(c.tamanho_tanque) AS media_capacidade_tanque 
+    FROM 
+        marcas a
+    INNER JOIN carros b ON 
+        a.id_marca = b.id_marca
+    INNER JOIN componentes_internos c ON 
+        b.id_carro = c.id_carro
+    GROUP BY 
+        a.nome_marca
+)
+SELECT 
+    x.nome_marca as 'MARCA',
+    round(x.media_consumo, 2) AS 'MEDIA DE CONSUMO',
+    round(x.media_capacidade_tanque, 2) AS 'TAMANHO TANQUE MÉDIA',
+    round((x.media_consumo * x.media_capacidade_tanque), 2) AS 'MÉDIA DE AUTONOMIA' 
+FROM 
+    consumoMarca X
+ORDER BY 
+	x.nome_marca,
+    'MÉDIA DE AUTONOMIA' DESC
+;

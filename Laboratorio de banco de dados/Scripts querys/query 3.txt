@@ -1,0 +1,20 @@
+SELECT 
+    a.nome_marca as 'MARCA', 
+    b.tipo AS 'TIPO', 
+    COUNT(*) AS 'QUANTIDADE DE VEÍCULOS',
+    MAX(b.ano_fabricacao) AS 'VEÍCULO MAIS RECENTE'
+FROM 
+    marcas a
+INNER JOIN carros b ON 
+	a.id_marca = b.id_marca
+WHERE 
+    b.ano_fabricacao >= 2020
+GROUP BY 
+    a.nome_marca, 
+    b.tipo
+HAVING 
+    COUNT(*) >= 4
+ORDER BY 
+    a.nome_marca, 
+    b.tipo
+;
