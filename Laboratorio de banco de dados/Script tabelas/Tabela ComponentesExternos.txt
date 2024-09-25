@@ -1,0 +1,12 @@
+USE BD_CONCESSIONARIAS;
+
+CREATE TABLE IF NOT EXISTS COMPONENTES_EXTERNOS (
+    id_componentes_externos INT PRIMARY KEY AUTO_INCREMENT,
+    qtd_portas INT NOT NULL, 
+    qtd_assentos INT NOT NULL,
+    roda_aro INT NOT NULL, 
+    roda_pneu varchar(50) not null, 
+    tipo_retrovisor VARCHAR(100) NOT NULL,
+    id_carro INT,             
+    FOREIGN KEY (id_carro) REFERENCES CARROS(id_carro) ON DELETE CASCADE
+);
