@@ -1,0 +1,12 @@
+CREATE DATABASE IF NOT EXISTS BD_CONCESSIONARIAS;
+
+USE BD_CONCESSIONARIAS;
+
+CREATE TABLE IF NOT EXISTS MARCAS (
+    id_marca INT PRIMARY KEY AUTO_INCREMENT, 
+    nome_marca varchar(255) not null unique,
+    pais_sede VARCHAR(255) NOT NULL,
+    cidade_sede varchar(255) NOT NULL,
+    ceo_marca VARCHAR(255) NOT NULL,
+    fundacao varchar(20)
+);
