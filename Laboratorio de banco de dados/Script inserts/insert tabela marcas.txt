@@ -1,0 +1,14 @@
+USE BD_CONCESSIONARIAS;
+
+INSERT INTO MARCAS (nome_marca, pais_sede, cidade_sede, ceo_marca, fundacao) VALUES
+('Toyota', 'Japão', 'Toyota', 'Akio Toyoda', 1937),
+('Honda', 'Japão', 'Tóquio', 'Toshihiro Mibe', 1948),
+('Volkswagen', 'Alemanha', 'Wolfsburg', 'Oliver Blume', 1937),
+('Chevrolet', 'Estados Unidos', 'Detroit', 'Mary Barra', 1911),
+('Fiat', 'Itália', 'Turim', 'Carlos Tavares', '1899'),
+('Jeep', 'Estados Unidos', 'Ohio', 'Christian Meunier', 1941),
+('Ford', 'Estados Unidos', 'Michigan', 'Jim Farley', 1903),
+('Peugeot', 'França', 'Sochaux', 'Carlos Tavares', 1810),
+('BMW', 'Alemanha', 'Munique', 'Oliver Zipse', 1916),
+('Mercedes', 'Alemanha', 'Stuttgart', 'Ola Källenius', 1926),
+('Audi', 'Alemanha', 'Ingolstadt', 'Markus Duesmann', 1909);
