@@ -1,0 +1,13 @@
+USE BD_CONCESSIONARIAS;
+
+CREATE TABLE IF NOT EXISTS ACESSORIOS (
+    id_acessorio INT PRIMARY KEY AUTO_INCREMENT,
+    banco VARCHAR(255) NOT NULL, 
+    ar_condicionado VARCHAR(3) NOT NULL CHECK(ar_condicionado IN ('Sim', 'Não')), 
+    camera_re VARCHAR(3) NOT NULL CHECK(camera_re IN ('Sim', 'Não')),
+    qtd_airbag INT NOT NULL, 
+    multmidia VARCHAR(3) NOT NULL CHECK(multmidia IN ('Sim', 'Não')),
+    teto_solar VARCHAR(3) NOT NULL CHECK(teto_solar IN ('Sim', 'Não')),
+    id_carro INT, 
+    FOREIGN KEY (id_carro) REFERENCES CARROS(id_carro) ON DELETE CASCADE
+);
