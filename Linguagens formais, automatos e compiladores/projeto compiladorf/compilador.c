@@ -80,7 +80,7 @@ void identificarToken(FILE* arquivo) {
     while ((caractere = fgetc(arquivo)) != EOF) {
         if (isspace(caractere)) {  // identifica caractere em branco
             if (caractere == '\n') linha++;  // se identificar quebra de linha, pula para a próxima
-        } else if (isalpha(caractere)) {  // se não, vem para esse bloco de comandos, aqui ele vai verificar se o caractere é alfanumerico
+        } else if (isalpha(caractere)) {  // se não, vem para esse bloco de comandos, aqui ele vai verificar se é uma letra
             caractere_id = 0;
             do {
                 palavra[caractere_id++] = caractere;  // Armazena a palavra no vetor palavra
@@ -90,6 +90,30 @@ void identificarToken(FILE* arquivo) {
             palavra[caractere_id] = '\0';  // encerra a string
 
             tipoToken tipo = checarToken(palavra);  // Verifica se é palavra-chave
+            token t = criarToken(tipo, palavra, linha); 
+            salvarToken(arquivoLex, t); 
+        } else if (isdigit(caractere)) {  // verifica números
+            caractere_id = 0;
+            int lerNumeroReal = 0;
+            do {
+                palavra[caractere_id++] = caractere;
+                caractere = fgetc(arquivo);
+
+                if (caractere == '.' && isdigit(palavra[caractere_id - 1])) { // verifica se o caractere atual é ponto, e o anterior um número
+                    palavra[caractere_id++] = caractere; 
+                    caractere = fgetc(arquivo);
+                    
+                    while (isdigit(caractere)) {
+                        palavra[caractere_id++] = caractere; 
+                        caractere = fgetc(arquivo); 
+                    }
+                    lerNumeroReal = 1;  // Identifica que leu um número real
+                }
+
+            } while (isdigit(caractere) || (caractere == '.' && isdigit(palavra[caractere_id - 1]))); 
+
+            palavra[caractere_id] = '\0';
+            tipoToken tipo = lerNumeroReal ? tk_real_num : tk_int;  // Define se é número inteiro ou real
             token t = criarToken(tipo, palavra, linha); 
             salvarToken(arquivoLex, t); 
         } else {
