@@ -65,7 +65,7 @@ tipoToken checarElemento(const char* operador) {
     return tk_desconhecido;
 }
 
-void identificarToken(FILE* arquivo) {
+void analisadorLexico(FILE* arquivo) {
     int linha = 1;
     int caractere;
     char palavra[MAX_TK];
@@ -146,7 +146,7 @@ int main() {
         return 1;
     }
 
-    identificarToken(arquivo);
+    analisadorLexico(arquivo);
     fclose(arquivo);
     return 0;
 }
