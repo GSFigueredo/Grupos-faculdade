@@ -21,8 +21,8 @@
       "args": [],
       "stopAtEntry": false,
       "externalConsole": false,
-      "cwd": "/workspaces/gruposFaculdade/Linguagens formais, automatos e compiladores/projeto compiladorf",
-      "program": "/workspaces/gruposFaculdade/Linguagens formais, automatos e compiladores/projeto compiladorf/build/Debug/outDebug",
+      "cwd": "/workspaces/gruposFaculdade/Linguagens_formais_automatos_compiladores/projeto_compilador",
+      "program": "/workspaces/gruposFaculdade/Linguagens_formais_automatos_compiladores/projeto_compilador/build/Debug/outDebug",
       "MIMode": "gdb",
       "miDebuggerPath": "gdb",
       "setupCommands": [
