@@ -160,4 +160,8 @@ int main() {
 
     fclose(arquivo);
     fclose(arquivoLex);
+
+    // cd /workspaces/gruposFaculdade/Linguagens_formais_automatos_compiladores/projeto_compilador
+    // gcc -o codigoPrincipal compilador.c analisador_sintatico.c
+    // ./codigoPrincipal
 }
