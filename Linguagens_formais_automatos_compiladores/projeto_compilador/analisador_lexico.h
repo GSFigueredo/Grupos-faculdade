@@ -40,4 +40,11 @@ typedef enum {
     tk_desconhecido   // Qualquer outro caractere não reconhecido -------- token: 32
 } tipoToken;
 
+#define MAX_TK 100 
+typedef struct {
+    tipoToken tipo;
+    char palavra[MAX_TK];
+    int linha;
+} token;
+
 #endif

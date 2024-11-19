@@ -3,13 +3,15 @@
 #include <ctype.h>
 #include <string.h>
 #include "analisador_lexico.h" 
+#include "analisador_sintatico.h"
 
 #define MAX_TK 100 
-typedef struct {
+/*typedef struct {
     tipoToken tipo;
     char palavra[MAX_TK]; 
     int linha;
-} token;
+} token;*/
+token token_atual;
 
 token criarToken(tipoToken tipo, const char* palavra, int linha) {
     token t;
@@ -147,6 +149,15 @@ int main() {
     }
 
     analisadorLexico(arquivo);
+
+    FILE* arquivoLex = fopen("saida.lex", "r");
+    if (!arquivoLex) {
+        perror("Erro ao abrir o arquivo de tokens");
+        return 1;
+    }
+
+    analisadorSintatico(arquivoLex);
+
     fclose(arquivo);
-    return 0;
+    fclose(arquivoLex);
 }

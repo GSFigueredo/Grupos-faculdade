@@ -4,7 +4,9 @@
     "string.h": "c",
     "random": "c",
     "stdio.h": "c",
-    "sstream": "c"
+    "sstream": "c",
+    "analisador_lexico.h": "c",
+    "analisador_sintatico.h": "c"
   },
   "C_Cpp_Runner.cCompilerPath": "gcc",
   "C_Cpp_Runner.cppCompilerPath": "g++",
