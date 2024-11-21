@@ -125,7 +125,20 @@ void analisadorLexico(FILE* arquivo) {
             do { 
                 palavra[caractere_id++] = caractere;
                 caractere = fgetc(arquivo);
-            } while (!isalnum(caractere) && !isspace(caractere)); 
+            } while ((!isalnum(caractere) && !isspace(caractere)) || 
+                caractere == ';' || 
+                caractere == ':' || 
+                caractere == '+' || 
+                caractere == '-' || 
+                caractere == '*' || 
+                caractere == '/' || 
+                caractere == '>' || 
+                caractere == '<' || 
+                caractere == '=' || 
+                caractere == '(' || 
+                caractere == ')' || 
+                caractere == ',' || 
+                caractere == '.'); 
 
             palavra[caractere_id++] = '\0';
 
