@@ -1,0 +1,42 @@
+código certo 1:
+
+program Exemplo1 ;  
+var  
+    x , y : integer ;  
+begin  
+    x := 10 ;  
+    y := 20 ;  
+    x := x + y ;  
+end .  
+
+saída: "Feita a análise léxica e a análise sintática com sucesso."
+  
+
+código certo 2: 
+
+program Exemplo2 ;
+var  
+    z : real ;  
+begin  
+    z := 10.5 ;
+    if z > 5.0 then 
+        z := z * 2.0 
+    else  
+        z := z / 2.0 ;  
+end .  
+
+saída: "Feita a análise léxica e a análise sintática com sucesso."
+
+código certo 3: 
+
+program Exemplo3 ;  
+var  
+    contador : integer ;  
+begin  
+    contador := 0 ;  
+    while contador < 10 do
+        contador := contador + 1 ;  
+end .  
+  
+saída: "Feita a análise léxica e a análise sintática com sucesso."
+ 

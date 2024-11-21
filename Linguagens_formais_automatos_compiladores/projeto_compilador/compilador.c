@@ -171,6 +171,8 @@ int main() {
 
     analisadorSintatico(arquivoLex);
 
+    printf("\nFeita a análise léxica e a análise sintática com sucesso.");
+
     fclose(arquivo);
     fclose(arquivoLex);
 

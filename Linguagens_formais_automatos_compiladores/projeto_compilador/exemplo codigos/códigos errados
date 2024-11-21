@@ -1,0 +1,40 @@
+código 1:
+
+o código em questão está com um erro na palavra reservada "program"
+
+progr ExemploErro1;
+var
+    x: integer;
+begin
+    x := 5;
+    x := x + 10;
+end.
+
+saída: 1: token nao esperado [progr].
+
+código 2:
+
+program ExemploErro1;
+    x: integer;
+begin
+    x := 5;
+    x := x + 10;
+end.
+
+O código em questão está sem a palavra reservada "var".
+
+saída: 2: token nao esperado [x].
+
+código 3:
+
+o código em questão está sem o ";" no final da primeira linha do código.
+
+program ExemploErro2
+var
+    y: integer;
+begin
+    y := 20
+    y := y * 2;
+end.
+
+saída: 1: token nao esperado [var].

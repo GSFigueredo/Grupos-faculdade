@@ -1,15 +1,7 @@
-program exemplo ; 
-var 
-    x , y : integer ; 
-    z : real ; 
-begin 
-    x := 10.5 ; 
-    y := 20 ; 
-    z := x + y ; 
-    if z > 20 then 
-        z := z * 2 
-    else 
-        z := z / 2 ; 
-    while x < y do 
-        x := x + 1 ; 
-end . 
+program ExemploErro2
+var
+    y: integer;
+begin
+    y := 20
+    y := y * 2;
+end.
