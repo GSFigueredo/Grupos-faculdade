@@ -1,9 +1,9 @@
-program exemplo1 ;
-var
-    x, y : integer ;
-    z : real ;
-begin
-    x := 10 ;
-    y := 20 ;
-    z := x + y ;
-end .
+program exemplo1 ; 
+var 
+x , y : integer ; 
+z : real ; 
+begin 
+x := 10 ; 
+y := 20 ; 
+z := x + y ; 
+end . 
