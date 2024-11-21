@@ -37,11 +37,11 @@ void ParteDeDeclaracoesVariaveis(FILE *arquivoLex) {
     if (token_atual.tipo == tk_var) {
         CasaToken(tk_var, arquivoLex);
         DeclaracaoVariaveis(arquivoLex);
+        
         while (token_atual.tipo == tk_pt_virg) {
             CasaToken(tk_pt_virg, arquivoLex);
             DeclaracaoVariaveis(arquivoLex);
         }
-        CasaToken(tk_pt_virg, arquivoLex);
     }
 }
 

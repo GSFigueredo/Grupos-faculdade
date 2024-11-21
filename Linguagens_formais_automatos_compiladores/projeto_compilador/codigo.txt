@@ -1,9 +1,15 @@
-program exemplo1 ; 
+program exemplo ; 
 var 
-x , y : integer ; 
-z : real ; 
+    x , y : integer ; 
+    z : real ; 
 begin 
-x := 10 ; 
-y := 20 ; 
-z := x + y ; 
+    x := 10.5 ; 
+    y := 20 ; 
+    z := x + y ; 
+    if z > 20 then 
+        z := z * 2 
+    else 
+        z := z / 2 ; 
+    while x < y do 
+        x := x + 1 ; 
 end . 
