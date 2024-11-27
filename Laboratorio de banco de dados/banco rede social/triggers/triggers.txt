@@ -14,3 +14,20 @@ BEGIN
         SET MESSAGE_TEXT = 'O limite de 5 tags por usuário foi atingido.';
     END IF;
 END$$
+
+CREATE TRIGGER trg_limite_tags_update
+BEFORE UPDATE ON usuarios_tags
+FOR EACH ROW
+BEGIN
+    DECLARE total_tags INT;
+    
+    SELECT COUNT(*) INTO total_tags
+    FROM usuarios_tags
+    WHERE id_usuario = NEW.id_usuario AND id_tag != OLD.id_tag;
+    
+    IF total_tags >= 5 THEN
+        SIGNAL SQLSTATE '45000'
+        SET MESSAGE_TEXT = 'O limite de 5 tags por usuário foi atingido.';
+    END IF;
+END$$
+DELIMITER ;
