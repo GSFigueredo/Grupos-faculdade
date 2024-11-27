@@ -31,3 +31,25 @@ BEGIN
     END IF;
 END$$
 DELIMITER ;
+
+DELIMITER $$
+CREATE PROCEDURE registrar_notificacao(
+    IN p_id_usuario INT, 
+    IN p_tipo_acao ENUM('Like', 'Comentário'), 
+    IN p_id_acao INT, 
+    IN p_origem ENUM('Postagem', 'Comentário')
+)
+BEGIN
+    INSERT INTO notificacoes (id_usuario, tipo_acao, id_acao, origem, data_notificacao)
+    VALUES (p_id_usuario, p_tipo_acao, p_id_acao, p_origem, CURRENT_TIMESTAMP);
+END $$
+DELIMITER ;
+
+DELIMITER $$
+CREATE TRIGGER trigger_like_postagem
+AFTER INSERT ON avaliacoes_postagens
+FOR EACH ROW
+BEGIN
+    CALL registrar_notificacao(NEW.id_usuario, 'Like', NEW.id_postagem, 'Postagem');
+END $$
+DELIMITER ;
