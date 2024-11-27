@@ -1,0 +1,19 @@
+CREATE TABLE IF NOT EXISTS postagens (
+    id_postagem INT AUTO_INCREMENT PRIMARY KEY,
+    id_usuario INT NOT NULL,
+    data_criacao TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    conteudo TEXT NOT NULL,
+    tipo ENUM('texto', 'imagem', 'video') NOT NULL,
+    FOREIGN KEY (id_usuario) REFERENCES usuarios(id_usuario)
+);
+
+CREATE TABLE IF NOT EXISTS avaliacoes_postagens (
+    id_avaliacoes INT AUTO_INCREMENT PRIMARY KEY,
+    id_usuario INT NOT NULL,
+    id_postagem INT NOT NULL,
+    avaliacao ENUM('Like', 'Deslike') NOT NULL,
+    data_avaliacao TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (id_usuario) REFERENCES usuarios(id_usuario),
+    FOREIGN KEY (id_postagem) REFERENCES postagens(id_postagem),
+    UNIQUE (id_usuario, id_postagem)
+);
