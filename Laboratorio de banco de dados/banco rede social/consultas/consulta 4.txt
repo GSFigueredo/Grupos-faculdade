@@ -1,0 +1,13 @@
+SELECT 
+    a.nome AS nome_grupo, 
+    COUNT(DISTINCT c.id_tag) AS total_tags_diversas
+FROM  
+	grupos a
+INNER JOIN membros_grupo b ON 
+	a.id_grupo = b.id_grupo
+INNER JOIN usuarios_tags c ON 
+	b.id_usuario = c.id_usuario
+GROUP BY 
+	a.id_grupo
+ORDER BY 
+	total_tags_diversas DESC;
