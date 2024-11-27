@@ -1,0 +1,19 @@
+SELECT 
+    a.id_usuario, 
+    a.nome_usuario, 
+    COUNT(CASE WHEN c.avaliacao = 'Deslike' THEN 1 END) AS total_deslikes,
+    COUNT(c.id_avaliacoes) AS total_avaliacoes,
+    ROUND((COUNT(CASE WHEN c.avaliacao = 'Deslike' THEN 1 END) / COUNT(c.id_avaliacoes)) * 100, 2) AS proporcao_deslikes
+FROM 
+	usuarios A
+LEFT JOIN postagens b ON 
+	a.id_usuario = b.id_usuario
+LEFT JOIN avaliacoes_postagens c ON 
+	b.id_postagem = c.id_postagem
+GROUP BY 
+	a.id_usuario
+HAVING 
+	total_avaliacoes > 0
+ORDER BY 
+	proporcao_deslikes DESC, 
+    total_deslikes DESC;
