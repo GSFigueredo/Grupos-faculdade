@@ -1,0 +1,27 @@
+SELECT 
+	a.id_postagem, 
+    a.conteudo, 
+	b.total_comentarios,
+	c.total_avaliacoes
+FROM 
+	postagens a 
+left join (
+	SELECT 
+		xa.id_postagem,
+		COUNT(*) as total_comentarios
+    FROM 
+		comentarios xa 
+	group by 
+		xa.id_postagem
+) b on a.id_postagem = b.id_postagem
+left join (
+	SELECT 
+		xa.id_postagem,
+		COUNT(*) as total_avaliacoes
+	FROM 
+		avaliacoes_postagens xa 
+	GROUP BY 
+		xa.id_postagem
+) c on a.id_postagem = c.id_postagem
+ORDER BY 
+	b.total_comentarios + c.total_avaliacoes DESC;
