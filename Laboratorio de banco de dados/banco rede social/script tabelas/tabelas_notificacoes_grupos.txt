@@ -1,0 +1,17 @@
+CREATE TABLE IF NOT EXISTS notificacoes (
+    id_notificacao INT AUTO_INCREMENT PRIMARY KEY,
+    id_usuario INT NOT NULL,
+    tipo_acao ENUM('Like', 'Comentário') NOT NULL,
+    id_acao INT NOT NULL,  
+    origem ENUM('Postagem', 'Comentário') NOT NULL, 
+    data_notificacao TIMESTAMP DEFAULT CURRENT_TIMESTAMP, 
+    lida BOOLEAN DEFAULT FALSE, 
+    FOREIGN KEY (id_usuario) REFERENCES usuarios(id_usuario)
+);
+
+CREATE TABLE grupos (
+    id_grupo INT AUTO_INCREMENT PRIMARY KEY,
+    nome VARCHAR(100) UNIQUE NOT NULL,
+    descricao TEXT NOT NULL,
+    data_criacao TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
