@@ -1,7 +1,8 @@
-program ExemploErro2
-var
-    y: integer;
-begin
-    y := 20
-    y := y * 2;
-end.
+program Exemplo1 ;  
+var  
+    x , y : integer ;  
+begin  
+    x := 10 ;  
+    y := 20 ;  
+    x := x + y ;  
+end .  
