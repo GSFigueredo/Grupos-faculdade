@@ -1,0 +1,45 @@
+INSERT INTO postagens (id_usuario, conteudo, tipo) VALUES
+(1, 'Primeira postagem de Ana!', 'texto'),
+(2, 'Bruno compartilhou uma foto!', 'imagem'),
+(3, 'Pensando sobre a vida hoje.', 'texto'),
+(4, 'Diego está curtindo a praia!', 'video'),
+(5, 'Uma imagem para alegrar o dia.', 'imagem'),
+(6, 'Felipe lançou um pensamento profundo.', 'texto'),
+(7, 'Gabriela compartilhou um vídeo divertido.', 'video'),
+(8, 'Hugo postou um artigo interessante.', 'texto'),
+(9, 'Isabela mostrando sua nova arte.', 'imagem'),
+(10, 'João postou uma receita deliciosa!', 'texto'),
+(11, 'Karina compartilhou um clipe musical.', 'video'),
+(12, 'Lucas divulgou seu novo projeto.', 'imagem'),
+(13, 'Mariana compartilhou um texto motivador.', 'texto'),
+(14, 'Nicolas mostrando sua nova tatuagem.', 'imagem'),
+(15, 'Olivia falando sobre viagens.', 'texto');
+
+INSERT INTO avaliacoes_postagens (id_usuario, id_postagem, avaliacao) VALUES
+(1, 2, 'Like'), (2, 3, 'Like'), (3, 4, 'Deslike'),
+(4, 5, 'Like'), (5, 6, 'Deslike'), (6, 7, 'Like'),
+(7, 8, 'Like'), (8, 9, 'Deslike'), (9, 10, 'Like'),
+(10, 11, 'Deslike'), (11, 12, 'Like'), (12, 13, 'Like'),
+(13, 14, 'Deslike'), (14, 15, 'Like'), (15, 1, 'Like');
+
+INSERT INTO avaliacoes_postagens (id_usuario, id_postagem, avaliacao) VALUES
+(1, 1, 'Like'),
+(2, 2, 'Like'),
+(3, 3, 'Like'),
+(4, 4, 'Like'),
+(5, 5, 'Like'),
+(6, 6, 'Like'),
+(7, 7, 'Like'),
+(8, 8, 'Like'),
+(9, 9, 'Like'),
+(10, 10, 'Like'),
+(11, 11, 'Like'),
+(12, 12, 'Like'),
+(13, 13, 'Like'),
+(14, 14, 'Like'),
+(15, 15, 'Like'),
+(3, 2, 'Like'),
+(8, 3, 'Like'),
+(5, 4, 'Like'),
+(7, 5, 'Like'),
+(6, 9, 'Like');
