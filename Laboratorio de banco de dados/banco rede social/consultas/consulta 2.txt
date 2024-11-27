@@ -1,0 +1,19 @@
+SELECT 
+    A.id_usuario, 
+    A.nome_usuario, 
+    COUNT(DISTINCT C.id_avaliacoes) AS total_curtidas, 
+    COUNT(DISTINCT D.id_comentario) AS total_comentarios, 
+    (COUNT(DISTINCT C.id_avaliacoes) + COUNT(DISTINCT D.id_comentario)) AS total_engajamento
+FROM 
+	usuarios A
+LEFT JOIN postagens B ON 
+	A.id_usuario = B.id_usuario
+LEFT JOIN avaliacoes_postagens C ON 
+	B.id_postagem = C.id_postagem
+LEFT JOIN comentarios D ON 
+	B.id_postagem = D.id_postagem
+GROUP BY 
+	A.id_usuario
+ORDER BY 
+	total_engajamento DESC, 
+    A.nome_usuario;
