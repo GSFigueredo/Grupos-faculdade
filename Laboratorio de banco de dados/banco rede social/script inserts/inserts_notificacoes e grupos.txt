@@ -1,0 +1,23 @@
+INSERT INTO notificacoes (id_usuario, tipo_acao, id_acao, origem, lida) VALUES
+(1, 'Like', 2, 'Postagem', FALSE),
+(2, 'Comentário', 3, 'Postagem', TRUE),
+(3, 'Like', 4, 'Comentário', FALSE),
+(4, 'Like', 5, 'Postagem', TRUE),
+(5, 'Comentário', 6, 'Comentário', FALSE),
+(6, 'Like', 7, 'Postagem', TRUE),
+(7, 'Like', 8, 'Comentário', FALSE),
+(8, 'Comentário', 9, 'Postagem', TRUE),
+(9, 'Like', 10, 'Comentário', FALSE),
+(10, 'Like', 11, 'Postagem', TRUE),
+(11, 'Comentário', 12, 'Postagem', FALSE),
+(12, 'Like', 13, 'Comentário', TRUE),
+(13, 'Like', 14, 'Postagem', FALSE),
+(14, 'Comentário', 15, 'Comentário', TRUE),
+(15, 'Like', 1, 'Postagem', FALSE);
+
+INSERT INTO grupos (nome, descricao) VALUES
+('Grupo de Música', 'Discussões sobre música.'),
+('Grupo de Tecnologia', 'Novidades e tendências.'),
+('Grupo de Viagem', 'Dicas e experiências de viagem.'),
+('Grupo de Fotografia', 'Compartilhe suas fotos.'),
+('Grupo de Livros', 'Recomendações literárias.');
