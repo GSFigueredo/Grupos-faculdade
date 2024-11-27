@@ -53,3 +53,21 @@ BEGIN
     CALL registrar_notificacao(NEW.id_usuario, 'Like', NEW.id_postagem, 'Postagem');
 END $$
 DELIMITER ;
+
+DELIMITER $$
+CREATE TRIGGER trigger_like_comentario
+AFTER INSERT ON avaliacoes_comentarios
+FOR EACH ROW
+BEGIN
+    CALL registrar_notificacao(NEW.id_usuario, 'Like', NEW.id_comentario, 'Comentário');
+END $$
+DELIMITER ;
+
+DELIMITER $$
+CREATE TRIGGER trigger_comentario_postagem
+AFTER INSERT ON comentarios
+FOR EACH ROW
+BEGIN
+    CALL registrar_notificacao(NEW.id_usuario, 'Comentário', NEW.id_postagem, 'Postagem');
+END $$
+DELIMITER ;
