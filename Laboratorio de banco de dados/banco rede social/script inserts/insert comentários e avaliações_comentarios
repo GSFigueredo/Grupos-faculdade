@@ -1,0 +1,61 @@
+INSERT INTO comentarios (id_usuario, id_postagem, conteudo) VALUES
+(1, 2, 'Muito interessante!'),
+(2, 3, 'Adorei sua reflexão.'),
+(3, 4, 'Que lugar incrível!'),
+(4, 5, 'Foto maravilhosa!'),
+(5, 6, 'Você tem razão!'),
+(6, 7, 'Hahaha, que divertido!'),
+(7, 8, 'Gostei do artigo.'),
+(8, 9, 'Sua arte é incrível!'),
+(9, 10, 'Vou tentar essa receita.'),
+(10, 11, 'Que música legal!'),
+(11, 12, 'Ótimo projeto!'),
+(12, 13, 'Inspirador!'),
+(13, 14, 'Ficou incrível!'),
+(14, 15, 'Adoro viajar também.'),
+(15, 1, 'Parabéns pelo conteúdo!');
+
+INSERT INTO comentarios (id_usuario, id_postagem, conteudo) VALUES
+(2, 1, 'Muito bem colocado, Ana!'),
+(3, 1, 'Concordo totalmente!'),
+(4, 2, 'Bruno, essa foto está incrível!'),
+(5, 2, 'Que lugar é esse? Parece lindo!'),
+(6, 3, 'Você sempre com ótimas reflexões, Mariana.'),
+(7, 4, 'Queria estar aí também, Diego!'),
+(8, 5, 'Que talento! Parabéns.'),
+(9, 6, 'Adorei esse pensamento. Muito profundo!'),
+(10, 7, 'Esse vídeo é hilário!'),
+(11, 8, 'Muito informativo, Hugo.'),
+(12, 9, 'Que obra incrível, Isabela!'),
+(13, 10, 'Vou testar essa receita no fim de semana.'),
+(14, 11, 'Essa música me trouxe boas lembranças!'),
+(15, 12, 'Ótima iniciativa, Lucas.'),
+(1, 15, 'Adoro viajar também!'),
+(3, 15, 'Quais foram os destinos que você mais gostou?');
+
+INSERT INTO avaliacoes_comentarios (id_usuario, id_comentario, avaliacao) VALUES
+(2, 1, 'Like'), (3, 2, 'Like'), (4, 3, 'Deslike'),
+(5, 4, 'Like'), (6, 5, 'Like'), (7, 6, 'Deslike'),
+(8, 7, 'Like'), (9, 8, 'Like'), (10, 9, 'Deslike'),
+(11, 10, 'Like'), (12, 11, 'Like'), (13, 12, 'Deslike'),
+(14, 13, 'Like'), (15, 14, 'Like'), (1, 15, 'Deslike');
+
+INSERT INTO avaliacoes_comentarios (id_usuario, id_comentario, avaliacao) VALUES
+(1, 1, 'Like'),
+(2, 2, 'Like'),
+(3, 3, 'Like'),
+(4, 4, 'Like'),
+(5, 5, 'Like'),
+(6, 6, 'Like'),
+(7, 7, 'Like'),
+(8, 8, 'Like'),
+(9, 9, 'Like'),
+(10, 10, 'Like'),
+(11, 11, 'Like'),
+(12, 12, 'Like'),
+(13, 13, 'Like'),
+(14, 14, 'Like'),
+(15, 15, 'Like'),
+(1, 3, 'Like'),
+(2, 4, 'Like'),
+(3, 5, 'Like');
