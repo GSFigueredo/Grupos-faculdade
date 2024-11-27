@@ -1,0 +1,22 @@
+SELECT 
+    HOUR(data_criacao) AS hora, 
+    COUNT(*) AS total_atividades
+FROM (
+    SELECT 
+		data_criacao 
+	FROM postagens
+    UNION ALL
+    SELECT 
+		data_avaliacao 
+	FROM 
+		avaliacoes_postagens
+    UNION ALL
+    SELECT 
+		data_criacao 
+	FROM 
+		comentarios
+) atividades
+GROUP BY 
+	hora
+ORDER BY 
+	total_atividades DESC;
